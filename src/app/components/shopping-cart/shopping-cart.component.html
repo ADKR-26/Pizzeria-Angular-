@@ -1,0 +1,159 @@
+<section id="shopping-cart">
+  <div *ngIf="pizzasInCart.length > 0; else emptyCart">
+    <h1>Cart data</h1>
+    <div class="main-container">
+      <div class="sub-container">
+        <div *ngFor="let data of pizzasInCart" class="container">
+          <div class="container-item">
+            <img [src]="data.image" [alt]="data.name" height="100" />
+            <div class="container-item">
+              <div class="veg" *ngIf="data.type === 'veg'; else elseBlock">
+                <i class="bi bi-circle-fill"></i>
+              </div>
+              <ng-template #elseBlock>
+                <div class="non-veg">
+                  <i class="bi bi-circle-fill"></i>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+          <div class="container-item">
+            <div>
+              <b>{{ data.name }}</b>
+              <p>{{ data.description }}</p>
+              <!-- <p>{{ data.price | currency : "INR" : "symbol" : "1.2-2" }}</p> -->
+            </div>
+          </div>
+          <div class="container-item">
+            <div *ngIf="data.counter === 1; else decrease">
+              <button
+                (click)="deleteFromShoppingCart(data)"
+                class="delete-button"
+              >
+                <i
+                  class="bi bi-trash-fill"
+                  style="color: red; cursor: pointer"
+                ></i>
+              </button>
+            </div>
+            <ng-template #decrease>
+              <button
+                (click)="decreasePizzaCounter(data)"
+                class="counter-button"
+              >
+                -
+              </button>
+            </ng-template>
+            <p class="counter">{{ data.counter }}</p>
+            <button (click)="increasePizzaCounter(data)" class="counter-button">
+              +
+            </button>
+            <div class="total-price">
+              {{ data.price * data.counter | currency : "INR" }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="amount-container">
+        <p>Order Summary:</p>
+        <div class="order-summary-scroll">
+          <p>Pizza Details</p>
+
+          <div class="pizza-details" *ngFor="let pizza of pizzasInCart">
+            <div class="pizza-name">{{ pizza.name }}</div>
+            <div class="pizza-quantity">x{{ pizza.counter }}</div>
+            <div class="pizza-price">
+              {{ pizza.price * pizza.counter | currency : "INR" }}
+            </div>
+          </div>
+
+          <div *ngIf="toppingsInCart.length > 0">
+            <p>Toppings</p>
+            <div *ngFor="let items of toppingsInCart" class="pizza-details">
+              <div class="pizza-name">{{ items.name }}</div>
+              <div class="pizza-quantity">
+                {{ items.price | currency : "INR" : "symbol" }}
+              </div>
+              <div class="pizza-price">
+                <button (click)="deleteToppingsFromShoppingCart(items)">
+                  <i
+                    class="bi bi-trash-fill"
+                    style="color: red; cursor: pointer"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-summary-footer">
+          <p>
+            Total: {{ totalPayment | currency : "INR" : "symbol" : "1.2-2" }}
+          </p>
+          <button class="pay" (click)="confirmOrder()" routerLink="/payment">
+            Pay
+          </button>
+          <button class="clear" (click)="clearShoppingCart()">Clear</button>
+        </div>
+      </div>
+
+      <!-- <div class="amount-container">
+        <p>Order Summary:</p>
+        <p>Pizza Details</p>
+
+        <div *ngFor="let pizza of pizzasInCart">
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Quantity</th>
+            </tr>
+          </table>
+        </div>
+
+        <div *ngIf="toppingsInCart.length > 0">
+          <p>Ingredients</p>
+          <div *ngFor="let items of toppingsInCart">
+            <span>
+              Name:
+              <p>{{ items.name }}</p>
+              Price:
+              <p>{{ items.price }}</p>
+              <button (click)="deleteToppingsFromShoppingCart(items)">
+                <i
+                  class="bi bi-trash-fill"
+                  style="color: red; cursor: pointer"
+                ></i>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <p>Total: {{ totalPayment | currency : "INR" : "symbol" : "1.2-2" }}</p>
+
+        <button class="pay" (click)="confirmOrder()" routerLink="/payment">
+          Pay
+        </button>
+        <button class="clear" (click)="clearShoppingCart()">Clear</button>
+      </div> -->
+    </div>
+  </div>
+
+  <!-- Empty Cart -->
+
+  <ng-template #emptyCart>
+    <div id="empty-cart">
+      <div class="cart">
+        <i class="bi bi-cart-x"></i>
+      </div>
+      <div class="description">
+        <b>YOUR CART IS EMPTY </b> <br />Please add some items from the menu.
+      </div>
+      <div class="button-container">
+        <button class="squish-in" routerLink="/order-pizza">
+          EXPLORE MENU
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</section>

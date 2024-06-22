@@ -1,0 +1,24 @@
+<section id="navbar">
+  <div class="header">
+    <div class="header-left">
+      <span class="title" routerLink="/">Pizzeria</span>
+      <img
+        src="../../../assets/PizzeriaLogo.png"
+        routerLink="/"
+        alt="Logo"
+        height="50"
+      />
+      <a href="/order-pizza" routerLink="/order-pizza">Order Pizza</a>
+      <a href="build-ur-pizza" routerLink="/build-ur-pizza">Build Ur Pizza</a>
+    </div>
+
+    <div class="shopping-button">
+      <button routerLink="/shopping-cart">
+        <i class="bi bi-cart4"></i>
+        Shopping Cart
+        <span>{{ itemsInCart }}</span>
+      </button>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</section>

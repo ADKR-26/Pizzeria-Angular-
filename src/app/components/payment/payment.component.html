@@ -1,0 +1,38 @@
+<section id="payment">
+  <div class="main-container">
+    <label>Your Order is placed !!</label>
+    <p>Order Summary:</p>
+    <div class="details">
+      <div class="container" *ngFor="let data of pizzaToShow">
+        <div class="container-item">
+          <div>
+            {{ data.name }}
+          </div>
+          <div>
+            <span>Quantity</span>
+            {{ data.counter }}
+          </div>
+          <div>
+            <span>Price</span>
+            {{ data.price * data.counter | currency : "INR" : "symbol" : "1.2-2" }}
+          </div>
+        </div>
+      </div>
+
+      <div class="container" *ngFor="let topping of toppingsToShow">
+        <div class="container-item">
+          <div>
+            {{ topping.name }}
+          </div>
+          <div>
+            <span>Price</span>
+            {{ topping.price | currency : "INR" : "symbol" : "1.2-2" }}
+          </div>
+        </div>
+      </div>
+      <div>
+        Total Amount: {{ totalPayment | currency : "INR" : "symbol" : "1.2-2" }}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,34 @@
+<section id="order-pizza">
+  <h1>Order Pizza</h1>
+  <div class="container">
+    <div class="main-container" *ngFor="let pizza of pizzaData">
+      <div class="grid-item">
+        <b>{{ pizza.name }}</b>
+        <p class="{{ pizza.type === 'veg' ? 'green-text' : 'red-text' }}"></p>
+        <!-- <p class="green-text"> Test </p> -->
+        <b>{{ pizza.price | currency : "INR" : "symbol" : "1.2-2" }}</b>
+      </div>
+      <div class="grid-item">
+        <p>{{ pizza.description }}</p>
+        <b>Ingredients: </b>
+        <p>{{ pizza.ingredients }}</p>
+        <b>Toppings: </b>
+        <p>{{ pizza.topping }}</p>
+      </div>
+      <div class="grid-item">
+        <img [src]="pizza.image" alt="Pizza Image" />
+        <div *ngIf="!isInCart(pizza); else elseblock">
+          <button class="addToCart" (click)="sendPizzaDataToCart(pizza)">
+            Add to Cart
+          </button>
+        </div>
+        <ng-template #elseblock>
+          <button class="remove" (click)="sendPizzaDataToCart(pizza)">
+            Remove
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- <app-footer></app-footer> -->

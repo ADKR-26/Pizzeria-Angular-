@@ -1,0 +1,34 @@
+<section id="build-pizza">
+  <div class="main-container">
+    <h1>Build Ur Pizza</h1>
+
+    <div class="container" *ngFor="let data of availableToppings">
+      <div class="container-item">
+        <img [src]="data.image" [alt]="data.tname" />
+      </div>
+      <div class="container-item">
+        <b>Name: </b> {{ data.tname }} <b>Price: </b>
+        {{ data.price | currency : "INR" : "symbol" : "1.2-2" }}
+      </div>
+      <div class="container-item">
+        <!-- <input type="checkbox" name="" id="{{ data._id }}" (change)="totalAmount(data.price, $event.target)"> -->
+        <input
+          type="checkbox"
+          name=""
+          [id]="data._id"
+          [checked]="data.checked"
+          (click)="addTopping(data)"
+        />
+        <label [for]="data._id">Add</label>
+      </div>
+    </div>
+
+    <div>
+      <h2>Total Cost: {{ totalPrice | currency: 'INR': 'symbol': '1.2-2' }}</h2>
+    </div>
+
+    <div class="center">
+      <button (click)="sendToppingsData()">Build Ur Pizza</button>
+    </div>
+  </div>
+</section>

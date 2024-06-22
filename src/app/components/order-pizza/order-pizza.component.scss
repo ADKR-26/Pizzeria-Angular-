@@ -1,0 +1,91 @@
+#order-pizza {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .main-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-container .grid-item {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .main-container .grid-item:first-child {
+    align-items: flex-start;
+  }
+
+  .main-container .grid-item:last-child {
+    align-items: center;
+  }
+
+  .main-container img {
+    height: 200px;
+    width: 200px;
+    object-fit: contain;
+  }
+
+  .main-container b {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+
+  .main-container p {
+    margin: 5px 0;
+  }
+
+  .main-container .green-text,
+  .main-container .red-text {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+
+  .main-container .green-text {
+    background-color: green;
+  }
+
+  .main-container .red-text {
+    background-color: red;
+  }
+
+  .container button {
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 2.5rem;
+    width: 7rem;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .container .addToCart {
+    background-color: orange;
+  }
+
+  .container .remove {
+    background-color: red;
+  }
+  
+  .container .remove:hover {
+    background-color: rgb(235, 76, 76);
+  }
+
+  .container .addToCart:hover {
+    background-color: rgb(235, 180, 80);
+  }
+}
